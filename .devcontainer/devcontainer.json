@@ -1,0 +1,27 @@
+{
+    "name": "Claude Pro AI Agent Environment",
+    "build": {
+      "dockerfile": "Dockerfile",
+      "context": ".."
+    },
+    "customizations": {
+      "vscode": {
+        "extensions": [
+          "ms-python.python",
+          "ms-python.vscode-pylance",
+          "eamodio.gitlens"
+        ]
+      }
+    },
+    "runArgs": [
+      "--gpus", "all",
+      "--ipc=host"
+    ],
+    "containerEnv": {
+      "PYTHONUTF8": "1"
+    },
+    "mounts": [
+      "source=claude-config,target=/root/.claude,type=volume"
+    ],
+    "remoteUser": "root"
+  }

@@ -1,0 +1,36 @@
+# Binocular Camera Calibration Parameters: ZED 2i used for the kiwi dataset in stereo-original-image/
+# Source: Jing et al., Comput. Electron. Agric. 225 (2024) 109333, Table 2
+# Dataset: https://github.com/Smart-Ag/Kiwifruit_stereo_camera_image (formerly fu3lab/...)
+image_width: 1280
+image_height: 720
+
+# Dataset frames are ZED SDK output, already rectified (row misalignment ~0.6 px), so the pair is passed
+# through untouched and Q is built directly from the left intrinsics + baseline. Re-warping them with
+# the paper's K1/K2/R adds ~28 px of vertical misalignment and breaks row-wise stereo matching.
+already_rectified: true
+
+# Paper Table 2 reports fx=518.843, cx=540.017 alongside fy=614.084, cy=359.271: fx/fy and cx/640 both
+# equal 1080/1280, i.e. the MATLAB calibration ran on frames squeezed to 1080x720 (the paper also cites
+# "1080x720"). The horizontal terms are rescaled by 1280/1080 here so pixels are square at native 1280x720.
+left_camera:
+  camera_matrix:
+    - [614.925, 0.0, 640.020]     # 518.843 * 1280/1080, 540.017 * 1280/1080
+    - [0.0, 614.084, 359.271]
+    - [0.0, 0.0, 1.0]
+  dist_coeffs: [0.0, 0.0, 0.0, 0.0, 0.0]   # Not reported; frames are already undistorted
+
+right_camera:
+  camera_matrix:
+    - [614.835, 0.0, 641.773]     # 518.767 * 1280/1080, 541.496 * 1280/1080
+    - [0.0, 615.583, 363.337]
+    - [0.0, 0.0, 1.0]
+  dist_coeffs: [0.0, 0.0, 0.0, 0.0, 0.0]
+
+extrinsics:
+  R:
+    - [1.0, 0.000473, -0.003134]
+    - [-0.000487, 1.0, -0.004598]
+    - [0.003132, 0.004600, 1.0]
+  # Translation vector in mm: [Tx, Ty, Tz]
+  T: [-119.671, 3.842, 2.025]
+  baseline_mm: 119.671            # ZED 2i nominal baseline 120 mm

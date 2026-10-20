@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.venv/
+venv/
+env/
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+.test_write
+
+# Datasets (large / licensed) - see README for sources
+stereo-original-image/
+data/train/
+data/valid/
+data/test/
+data/test_holdout/
+*.cache
+*.zip
+
+# Model weights - only the two used for inference are tracked
+*.pt
+*.pth
+*.onnx
+!weights/best.pt
+!weights/raftstereo-middlebury.pth
+
+# Training runs and inference outputs
+runs/
+output_result*.png
+*.npy
+*.ply
+*.pcd
+*.jsonl
+debug_log.txt
+
+# Reference papers (copyrighted)
+*.pdf

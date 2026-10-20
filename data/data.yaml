@@ -1,0 +1,14 @@
+path: .
+train: train/images
+val: valid/images
+test: test/images
+
+nc: 1
+names: ['Kiwi-segmentation']
+
+roboflow:
+  workspace: mihai-oatu-s-workspace
+  project: kiwi-segmentation
+  version: 2
+  license: Private
+  url: https://app.roboflow.com/mihai-oatu-s-workspace/kiwi-segmentation/2

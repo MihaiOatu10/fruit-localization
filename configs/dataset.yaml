@@ -1,0 +1,10 @@
+# Ultralytics YOLO-seg Dataset Configuration
+# Staged paths after dataset preparation
+path: /mnt/c/users/themi/documents/projects/tomatolocalization/data
+train: train/images
+val: val/images
+test: test_holdout/left/images
+
+# Classes
+names:
+  0: kiwifruit

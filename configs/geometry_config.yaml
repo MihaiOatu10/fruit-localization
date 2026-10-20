@@ -1,0 +1,31 @@
+# 3D Point Cloud Processing & Sphere Fitting Parameters
+pointcloud:
+  z_min_mm: 150.0               # Sensor near plane cut-off
+  z_max_mm: 3500.0              # Sensor far plane cut-off
+  fallback_z_min_mm: 100.0      # Broader envelope used when z_min..z_max leaves < 10 points
+  fallback_z_max_mm: 3500.0
+  voxel_size_mm: 2.0            # Grid downsampling step in mm
+  min_points_threshold: 10      # Minimum points required to attempt sphere fit
+  surface_band_mm: 40.0         # Keep only the densest range band of this width along the viewing ray (~1 fruit radius)
+  surface_band_pad_mm: 5.0      # Disparity-noise padding on both sides of the band
+
+outlier_removal:
+  method: "lof"                 # "lof" (Local Outlier Factor) or "statistical"
+  lof_neighbors: 20             # k nearest neighbors
+  lof_contamination: 0.05       # Proportion of expected outliers
+  statistical_std_ratio: 1.5
+
+sphere_fitting:
+  max_iterations: 200
+  ftol: 1.0e-7
+  xtol: 1.0e-7
+  radius_bounds_mm: [10.0, 90.0]  # Plajă extinsă pentru raze de kiwi
+  max_allowed_rmse_mm: 8.0         # Near-field surface RMSE gate; residual bleed is removed upstream by pointcloud.surface_band_mm
+  rmse_disparity_noise_px: 0.10    # Gate = sqrt(max_allowed_rmse^2 + (delta*Z^2/(f*B))^2): ~8.0 mm @0.7 m, 8.7 @1.6 m, 9.7 @2 m (0 = fixed)
+  radius_prior_weight: 0.3         # Soft pull of r toward the cap's lateral radius (0 = pure surface fit)
+  loss_scale_mm: 2.0               # soft_l1 scale on surface residuals (suppresses mask-edge bleed)
+  ray_prior_weight: 0.5            # Soft pull of the centre onto the camera ray through the 2D mask centroid
+  valid_radius_mm: [17.5, 45.0]    # Plausible kiwi radius (35-90 mm diameter); fits outside are FIT_REJECTED
+  max_ray_offset_ratio: 0.5        # Reject if the centre sits > 0.5 r off the mask-centroid ray (lateral drift)
+  # Centroid Z bounds come from pointcloud.z_min_mm .. z_max_mm + max radius
+  valid_centroid_z_mm: [200.0, 2000.0]  # Pipeline rejects fitted centroids outside this depth window

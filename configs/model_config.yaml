@@ -1,0 +1,19 @@
+# Instance Segmentation Model & Boundary Sanitation Configuration
+# Zheng et al. (Agronomy 2023) 3D Fruit Localization Architecture
+
+segmentation:
+  # Fine-tuned weights path; will auto-fallback to runs/ or yolov8n-seg.pt if not found
+  model_weights: "weights/best.pt"
+  fallback_weights: "runs/train-seg/fruit_segmentation/weights/best.pt"
+  confidence_threshold: 0.10
+  iou_threshold: 0.45
+  target_classes: null       # null evaluates all detected fruit instances
+  device: "cpu"              # Inference device ("cpu" or "cuda:0")
+  image_size: 640
+  mask_threshold: 0.50
+
+mask_sanitation:
+  erosion_enabled: true
+  erosion_kernel_size: 3     # 3x3 elliptical structuring element
+  min_mask_area_pixels: 150  # Eliminates tiny noise artifacts
+  max_num_instances: 50      # Maximum fruit instances processed per stereo pair

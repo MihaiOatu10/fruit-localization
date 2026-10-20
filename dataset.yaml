@@ -1,0 +1,11 @@
+# YOLOv8-seg Dataset Configuration
+# Updated for new kiwi/fruit segmentation dataset (Roboflow v2)
+
+path: .
+train: data/train/images
+val: data/valid/images
+test: data/test/images
+
+nc: 1
+names:
+  0: Kiwi-segmentation

@@ -1,0 +1,15 @@
+.git/
+.venv/
+venv/
+__pycache__/
+*.pt
+*.onnx
+*.png
+*.jpg
+*.jpeg
+*.npy
+*.pcd
+*.ply
+debug_log.txt
+output_result*
+stereo-original-image/

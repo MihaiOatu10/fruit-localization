@@ -1,0 +1,27 @@
+# Binocular Camera Calibration Parameters (tomato paper rig, MV-SUA134GC; NOT the kiwi dataset camera)
+# Derived from Zheng et al., Agronomy 2023, 13, 2339 (Table 1)
+image_width: 1024
+image_height: 1024
+
+left_camera:
+  camera_matrix:
+    - [1122.700, 0.0, 325.913]
+    - [0.0, 1122.500, 234.467]
+    - [0.0, 0.0, 1.0]
+  dist_coeffs: [0.0, 0.0, 0.0, 0.0, 0.0]
+
+right_camera:
+  camera_matrix:
+    - [1130.600, 0.0, 330.586]
+    - [0.0, 1130.400, 259.772]
+  dist_coeffs: [0.0, 0.0, 0.0, 0.0, 0.0]
+
+extrinsics:
+  # Rotation matrix (identity approximation for calibrated aligned rig)
+  R:
+    - [1.0, 0.0, 0.0]
+    - [0.0, 1.0, 0.0]
+    - [0.0, 0.0, 1.0]
+  # Translation vector in mm: [Tx, Ty, Tz]
+  T: [-74.676, -0.168, 0.490]
+  baseline_mm: 74.676
